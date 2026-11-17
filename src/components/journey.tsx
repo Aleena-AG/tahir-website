@@ -14,8 +14,8 @@ const STEPS = [
     title: "Harvesting",
     text: "Timely, responsible leaf selection",
     src: "/journey/harvesting.png",
-    width: 480,
-    height: 332,
+    width: 680,
+    height: 477,
   },
   {
     title: "Processing",

@@ -18,8 +18,8 @@ const STEPS = [
     title: "Harvesting",
     text: "Leaves are harvested at the appropriate stage of maturity to help achieve the desired characteristics and quality.",
     src: "/journey/harvesting.png",
-    width: 480,
-    height: 332,
+    width: 680,
+    height: 477,
   },
   {
     title: "Processing",

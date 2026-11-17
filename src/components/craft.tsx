@@ -17,8 +17,8 @@ const STEPS = [
     title: "Blending",
     text: "Expertly combined for a consistent profile.",
     src: "/journey/harvesting.png",
-    width: 480,
-    height: 332,
+    width: 680,
+    height: 477,
   },
   {
     title: "Packaging",
