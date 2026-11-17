@@ -1,28 +1,29 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 const LINKS = [
   { id: "home", label: "Home", href: "/" },
-  { id: "collection", label: "The Collection", href: "/#collection" },
-  { id: "story", label: "Our Story", href: "/#story" },
-  { id: "packaging", label: "Packaging", href: "/#packaging" },
-  { id: "contact", label: "Contact", href: "/#contact" },
+  { id: "collection", label: "The Collection", href: "/collection" },
+  { id: "story", label: "Our Story", href: "/story" },
+  { id: "packaging", label: "Packaging", href: "/packaging" },
+  { id: "contact", label: "Contact", href: "/contact" },
 ] as const;
-
-type LinkId = (typeof LINKS)[number]["id"];
 
 const PLATE =
   "M0 0 H248 C256 6, 252 24, 242 40 C232 56, 222 70, 210 74 H0 Z";
 const EDGE = "M248 0 C256 6, 252 24, 242 40 C232 56, 222 70, 210 74";
 
 export function Navbar() {
-  const [active, setActive] = useState<LinkId>("home");
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const active =
+    LINKS.find((link) => link.href !== "/" && pathname.startsWith(link.href))?.id ??
+    "home";
 
-  function select(id: LinkId) {
-    setActive(id);
+  function select() {
     setOpen(false);
   }
 
@@ -32,7 +33,7 @@ export function Navbar() {
         <Link
           href="/"
           aria-label="TAHIR home"
-          onClick={() => select("home")}
+          onClick={select}
           className="relative z-10 flex w-[240px] shrink-0 items-center pr-8 pl-4 sm:w-[300px] sm:pl-6 lg:w-[360px]"
         >
           <LogoPlate />
@@ -46,8 +47,8 @@ export function Navbar() {
 
         </Link>
 
-        <nav aria-label="Primary" className="hidden min-w-0 flex-1 items-center lg:flex">
-          <ul className="grid w-full grid-cols-5 items-center">
+        <nav aria-label="Primary" className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
+          <ul className="flex items-center justify-center gap-7 xl:gap-9">
             {LINKS.map((link) => (
               <li key={link.id} className="text-center">
                 <NavLink
@@ -60,7 +61,8 @@ export function Navbar() {
           </ul>
         </nav>
 
-        <div className="ml-auto flex items-center gap-3 pr-3 sm:pr-6 lg:pr-7">
+        <div className="ml-auto flex items-center gap-3 pr-3 sm:gap-4 sm:pr-6 lg:pr-7">
+          <span aria-hidden className="h-9 w-px bg-[#e0c27a] sm:h-11" />
           <AdultsBadge />
           <button
             type="button"
@@ -86,7 +88,7 @@ export function Navbar() {
               <li key={link.id} className="border-b border-white/10 last:border-0">
                 <Link
                   href={link.href}
-                  onClick={() => select(link.id)}
+                  onClick={select}
                   aria-current={active === link.id ? "page" : undefined}
                   className={`flex items-center justify-between py-3.5 font-serif text-xl tracking-wide ${
                     active === link.id ? "text-[#e4c56d]" : "text-[#f6efe2]"
@@ -114,22 +116,24 @@ function NavLink({
 }: {
   link: (typeof LINKS)[number];
   active: boolean;
-  onSelect: (id: LinkId) => void;
+  onSelect: () => void;
 }) {
   return (
     <Link
       href={link.href}
-      onClick={() => onSelect(link.id)}
+      onClick={onSelect}
       aria-current={active ? "page" : undefined}
-      className={`relative font-serif text-[16px] tracking-[0.01em] transition-colors xl:text-[18px] ${
-        active ? "text-[#e4c56d]" : "text-[#f6efe2] hover:text-[#e4c56d]"
+      className={`group relative font-serif text-[16px] tracking-[0.01em] transition-all duration-300 xl:text-[18px] ${
+        active
+          ? "text-[#e4c56d] [text-shadow:0_0_14px_rgba(228,197,109,0.45)]"
+          : "text-[#f6efe2] hover:-translate-y-0.5 hover:text-[#e4c56d] hover:[text-shadow:0_0_14px_rgba(228,197,109,0.55)]"
       }`}
     >
       {link.label}
       <span
         aria-hidden
-        className={`absolute -bottom-2 left-1/2 h-[1.5px] -translate-x-1/2 bg-[#e4c56d] transition-all ${
-          active ? "w-7 opacity-100" : "w-0 opacity-0"
+        className={`absolute -bottom-2 left-1/2 h-[1.5px] -translate-x-1/2 bg-[#e4c56d] shadow-[0_0_8px_rgba(228,197,109,0.8)] transition-all duration-300 ${
+          active ? "w-7 opacity-100" : "w-0 opacity-0 group-hover:w-7 group-hover:opacity-100"
         }`}
       />
     </Link>
@@ -138,14 +142,12 @@ function NavLink({
 
 function AdultsBadge() {
   return (
-    <span className="inline-flex items-center rounded-full sm:gap-2 sm:border sm:border-[#d4b06a] sm:py-[3px] sm:pr-3.5 sm:pl-[3px]">
-      <span className="grid h-[26px] w-[26px] place-items-center rounded-full border border-[#d4b06a] font-serif text-[10px] leading-none text-[#f3e6c4]">
+    // <span className="inline-flex h-8 items-center rounded-full border border-[#e0c27a] bg-[#24160f] p-px pr-1 sm:h-9 sm:pr-3.5">
+      <span className="grid h-[26px] font-bold text-center w-[26px] place-items-center rounded-full border border-[#e0c27a] font-serif text-[16px] leading-none tracking-tight text-[#f6edd8] sm:h-[30px] sm:w-[30px] sm:text-[11px]">
         18+
       </span>
-      <span className="hidden font-serif text-[15px] text-[#f6efe2] sm:inline">
-        Adults Only
-      </span>
-    </span>
+     
+  
   );
 }
 

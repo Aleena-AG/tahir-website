@@ -1,4 +1,4 @@
-const PRODUCTS = [
+export const PRODUCTS = [
   {
     name: "TAHIR GOLD",
     edition: "Signature Edition",
@@ -49,12 +49,14 @@ const PRODUCTS = [
   },
 ] as const;
 
-export function Collection() {
+export function Collection({ intro = true }: { intro?: boolean }) {
   return (
     <section
       id="collection"
       aria-label="The Collection"
-      className="relative scroll-mt-24 overflow-hidden bg-[#140e09] px-4 py-16 text-[#f3e6c8] sm:px-6 sm:py-20 lg:px-8"
+      className={`relative scroll-mt-24 overflow-hidden bg-[#140e09] px-4 text-[#f3e6c8] sm:px-6 lg:px-8 ${
+        intro ? "py-16 sm:py-20" : "pt-6 pb-16 sm:pb-20"
+      }`}
     >
       <div
         aria-hidden
@@ -66,7 +68,7 @@ export function Collection() {
       />
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14">
+        {intro ? <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14">
           <p className="flex items-center justify-center gap-4 font-serif text-[0.7rem] tracking-[0.34em] text-[#e4c98a] uppercase">
             <span aria-hidden className="h-px w-10 bg-[#c6a15a] sm:w-16" />
             The Signature Range
@@ -78,7 +80,7 @@ export function Collection() {
           <p className="mt-3 font-serif text-lg text-[#e7d7b4] sm:text-xl">
             Six distinctive expressions. One signature identity.
           </p>
-        </div>
+        </div> : null}
 
         <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {PRODUCTS.map((product) => (

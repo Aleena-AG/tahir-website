@@ -20,18 +20,21 @@ export function Story() {
             <span aria-hidden className="h-px w-14 bg-[#c4a15a] sm:w-20" />
           </p>
           <h2 className="mt-4 font-serif text-4xl leading-tight font-medium sm:text-5xl">
-            The TAHIR Identity
+            TAHIR&apos;s Identity
           </h2>
-          <p className="mt-4 font-serif text-lg leading-relaxed text-[#3d2e22] sm:text-xl">
-            A premium tobacco range defined by quality craftsmanship and a
-            signature presentation.
+          <p className="mt-4 font-serif text-base leading-relaxed text-[#3d2e22] sm:text-lg">
+            TAHIR is a premium tobacco range defined by quality craftsmanship, a
+            consistent product experience, and a distinctive brand heritage.
+          </p>
+          <p className="mt-4 font-serif text-base leading-relaxed text-[#3d2e22] sm:text-lg">
+            Built on expertise and attention to detail, TAHIR represents a legacy
+            of responsible production and enduring brand values.
           </p>
           <a
-            href="#story"
-            className="mt-6 inline-flex items-center gap-2 border-b border-[#c4a15a] pb-0.5 font-serif text-base font-medium text-[#b8892e]"
+            href="/story"
+            className="mt-6 inline-flex items-center border-b border-[#c4a15a] pb-0.5 font-serif text-base font-medium text-[#b8892e]"
           >
             Learn More
-            <span aria-hidden>→</span>
           </a>
         </div>
       </div>
