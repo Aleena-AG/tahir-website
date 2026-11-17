@@ -3,7 +3,7 @@ import { PRODUCTS } from "@/components/collection";
 import { PackagingFaq } from "@/components/packaging-faq";
 
 export const metadata: Metadata = {
-  title: "Packaging & Labelling — TAHIR",
+  title: "Packaging & Labelling",
   description:
     "How TAHIR packs are labelled, including the variant name, the health warning, and the 18+ mark.",
 };

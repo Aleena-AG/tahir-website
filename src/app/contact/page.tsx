@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact-form";
 
 export const metadata: Metadata = {
-  title: "Contact — TAHIR",
+  title: "Contact",
   description: "Send a message to TAHIR. For adults 18 and over.",
 };
 

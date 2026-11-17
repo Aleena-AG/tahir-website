@@ -3,7 +3,7 @@ import { PageHero } from "@/components/page-hero";
 
 export function noticeMetadata(title: string, description: string): Metadata {
   return {
-    title: `${title} — TAHIR`,
+    title,
     description,
   };
 }

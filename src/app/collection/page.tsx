@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PRODUCTS } from "@/components/collection";
 
 export const metadata: Metadata = {
-  title: "Our Collection — TAHIR",
+  title: "Our Collection",
   description:
     "Six TAHIR variants, presented with their packaging identification.",
 };

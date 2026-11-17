@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Our Story — TAHIR",
+  title: "Our Story",
   description:
     "TAHIR is a tobacco brand with a clear focus on the origin, cultivation, and responsible production of tobacco.",
 };

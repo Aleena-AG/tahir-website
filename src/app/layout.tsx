@@ -14,8 +14,11 @@ const plex = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "TAHIR",
-  description: "TAHIR — a private collection for adults.",
+  title: {
+    default: "Tahirea",
+    template: "%s — Tahirea",
+  },
+  description: "Tahirea — a private collection for adults.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
