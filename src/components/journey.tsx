@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const STEPS = [
   {
@@ -101,15 +101,40 @@ export function Journey() {
 function JourneyFilm() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  const [waiting, setWaiting] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const frame = video?.parentElement;
+    if (!video || !frame) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        observer.disconnect();
+        if (!video.paused) return;
+        video.preload = "auto";
+        video.load();
+      },
+      { rootMargin: "240px" },
+    );
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, []);
 
   async function toggle() {
     const video = videoRef.current;
     if (!video) return;
-    if (video.paused) {
-      await video.play();
+    if (!video.paused) {
+      video.pause();
       return;
     }
-    video.pause();
+    setWaiting(true);
+    try {
+      await video.play();
+    } catch {
+      setWaiting(false);
+    }
   }
 
   return (
@@ -123,14 +148,24 @@ function JourneyFilm() {
       />
       <video
         ref={videoRef}
-        src="/ads.mp4"
+        src="/ads.mp4?v=2"
         playsInline
-        preload="none"
+        preload="metadata"
         className={`absolute inset-0 h-full w-full object-cover ${playing ? "" : "invisible"}`}
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
+        onPlaying={() => {
+          setPlaying(true);
+          setWaiting(false);
+        }}
+        onWaiting={() => {
+          if (videoRef.current && !videoRef.current.paused) setWaiting(true);
+        }}
+        onPause={() => {
+          setPlaying(false);
+          setWaiting(false);
+        }}
         onEnded={() => {
           setPlaying(false);
+          setWaiting(false);
           if (videoRef.current) videoRef.current.currentTime = 0;
         }}
       />
@@ -146,18 +181,31 @@ function JourneyFilm() {
           </span>
         ) : (
           <span className="relative grid h-14 w-14 place-items-center">
-            <span aria-hidden className="animate-journey-ring absolute inset-0 rounded-full bg-white/40" />
-            <span
-              aria-hidden
-              className="animate-journey-ring absolute inset-0 rounded-full bg-white/30 [animation-delay:0.9s]"
-            />
-            <span className="animate-journey-breathe relative grid h-14 w-14 place-items-center rounded-full bg-white text-[#243c2c] shadow-[0_8px_20px_rgba(0,0,0,0.22)]">
-              <PlayIcon />
+            {waiting ? null : (
+              <>
+                <span aria-hidden className="animate-journey-ring absolute inset-0 rounded-full bg-white/40" />
+                <span
+                  aria-hidden
+                  className="animate-journey-ring absolute inset-0 rounded-full bg-white/30 [animation-delay:0.9s]"
+                />
+              </>
+            )}
+            <span className="relative grid h-14 w-14 place-items-center rounded-full bg-white text-[#243c2c] shadow-[0_8px_20px_rgba(0,0,0,0.22)]">
+              {waiting ? <LoadingIcon /> : <PlayIcon />}
             </span>
           </span>
         )}
       </button>
     </div>
+  );
+}
+
+function LoadingIcon() {
+  return (
+    <span
+      aria-hidden
+      className="h-5 w-5 animate-spin rounded-full border-2 border-[#243c2c]/25 border-t-[#243c2c]"
+    />
   );
 }
 
