@@ -100,12 +100,14 @@ export function Journey() {
 
 function JourneyFilm() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
   const [playing, setPlaying] = useState(false);
   const [waiting, setWaiting] = useState(false);
+  const [docked, setDocked] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
-    const frame = video?.parentElement;
+    const frame = frameRef.current;
     if (!video || !frame) return;
 
     const observer = new IntersectionObserver(
@@ -121,6 +123,26 @@ function JourneyFilm() {
     observer.observe(frame);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame || !playing || docked) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry && entry.intersectionRatio < 0.25) setDocked(true);
+      },
+      { threshold: [0, 0.25] },
+    );
+    observer.observe(frame);
+    return () => observer.disconnect();
+  }, [playing, docked]);
+
+  function release() {
+    setPlaying(false);
+    setWaiting(false);
+    setDocked(false);
+  }
 
   async function toggle() {
     const video = videoRef.current;
@@ -138,64 +160,80 @@ function JourneyFilm() {
   }
 
   return (
-    <div className="relative h-64 overflow-hidden rounded-2xl bg-[#1c3a22] sm:h-80 lg:h-[22rem]">
-      <img
-        src="/journey-start.jpg"
-        alt="A tobacco field at sunrise"
-        width={1024}
-        height={682}
-        className={`absolute inset-0 h-full w-full object-cover ${playing ? "invisible" : ""}`}
-      />
-      <video
-        ref={videoRef}
-        src="/ads.mp4?v=2"
-        playsInline
-        preload="metadata"
-        className={`absolute inset-0 h-full w-full object-cover ${playing ? "" : "invisible"}`}
-        onPlaying={() => {
-          setPlaying(true);
-          setWaiting(false);
-        }}
-        onWaiting={() => {
-          if (videoRef.current && !videoRef.current.paused) setWaiting(true);
-        }}
-        onPause={() => {
-          setPlaying(false);
-          setWaiting(false);
-        }}
-        onEnded={() => {
-          setPlaying(false);
-          setWaiting(false);
-          if (videoRef.current) videoRef.current.currentTime = 0;
-        }}
-      />
-      <button
-        type="button"
-        onClick={toggle}
-        aria-label={playing ? "Pause the journey" : "Play the journey"}
-        className="absolute inset-0 grid place-items-center"
+    <div ref={frameRef} className="relative h-64 sm:h-80 lg:h-[22rem]">
+      <div className="absolute inset-0 overflow-hidden rounded-2xl bg-[#1c3a22]">
+        <img
+          src="/journey-start.jpg"
+          alt="A tobacco field at sunrise"
+          width={1024}
+          height={682}
+          className={`h-full w-full object-cover ${playing && !docked ? "invisible" : ""}`}
+        />
+      </div>
+      <div
+        className={
+          docked
+            ? "fixed right-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[60] aspect-video w-44 overflow-hidden rounded-xl bg-black shadow-[0_16px_40px_rgba(0,0,0,0.45)] sm:right-5 sm:w-64"
+            : "absolute inset-0 overflow-hidden rounded-2xl"
+        }
       >
-        {playing ? (
-          <span className="grid h-11 w-11 place-items-center rounded-full bg-white/95 text-[#1c1c1c] shadow-[0_8px_20px_rgba(0,0,0,0.25)]">
-            <PauseIcon />
-          </span>
-        ) : (
-          <span className="relative grid h-14 w-14 place-items-center">
-            {waiting ? null : (
-              <>
-                <span aria-hidden className="animate-journey-ring absolute inset-0 rounded-full bg-white/40" />
-                <span
-                  aria-hidden
-                  className="animate-journey-ring absolute inset-0 rounded-full bg-white/30 [animation-delay:0.9s]"
-                />
-              </>
-            )}
-            <span className="relative grid h-14 w-14 place-items-center rounded-full bg-white text-[#243c2c] shadow-[0_8px_20px_rgba(0,0,0,0.22)]">
-              {waiting ? <LoadingIcon /> : <PlayIcon />}
+        <video
+          ref={videoRef}
+          src="/ads.mp4?v=2"
+          playsInline
+          preload="metadata"
+          className={`h-full w-full object-cover ${playing ? "" : "invisible"}`}
+          onPlaying={() => {
+            setPlaying(true);
+            setWaiting(false);
+          }}
+          onWaiting={() => {
+            if (videoRef.current && !videoRef.current.paused) setWaiting(true);
+          }}
+          onPause={release}
+          onEnded={() => {
+            release();
+            if (videoRef.current) videoRef.current.currentTime = 0;
+          }}
+        />
+        <button
+          type="button"
+          onClick={toggle}
+          aria-label={playing ? "Pause the journey" : "Play the journey"}
+          className={
+            docked
+              ? "absolute right-2 bottom-2 grid h-8 w-8 place-items-center rounded-full bg-white/95 text-[#1c1c1c] shadow-[0_6px_16px_rgba(0,0,0,0.35)]"
+              : "absolute inset-0 grid place-items-center"
+          }
+        >
+          {playing ? (
+            <span
+              className={
+                docked
+                  ? "grid h-8 w-8 place-items-center"
+                  : "grid h-11 w-11 place-items-center rounded-full bg-white/95 text-[#1c1c1c] shadow-[0_8px_20px_rgba(0,0,0,0.25)]"
+              }
+            >
+              <PauseIcon />
             </span>
-          </span>
-        )}
-      </button>
+          ) : (
+            <span className="relative grid h-14 w-14 place-items-center">
+              {waiting ? null : (
+                <>
+                  <span aria-hidden className="animate-journey-ring absolute inset-0 rounded-full bg-white/40" />
+                  <span
+                    aria-hidden
+                    className="animate-journey-ring absolute inset-0 rounded-full bg-white/30 [animation-delay:0.9s]"
+                  />
+                </>
+              )}
+              <span className="relative grid h-14 w-14 place-items-center rounded-full bg-white text-[#243c2c] shadow-[0_8px_20px_rgba(0,0,0,0.22)]">
+                {waiting ? <LoadingIcon /> : <PlayIcon />}
+              </span>
+            </span>
+          )}
+        </button>
+      </div>
     </div>
   );
 }
