@@ -34,7 +34,7 @@ export function Navbar() {
           href="/"
           aria-label="TAHIR home"
           onClick={select}
-          className="relative z-10 flex w-[240px] shrink-0 items-center pr-8 pl-4 sm:w-[300px] sm:pl-6 lg:w-[360px]"
+          className="relative z-10 flex w-[14.2rem] shrink-0 items-center pl-4 sm:w-[300px] sm:pl-6 lg:w-[360px]"
         >
           <LogoPlate />
           <img
@@ -42,9 +42,8 @@ export function Navbar() {
             alt=""
             width={471}
             height={205}
-            className="relative z-10 h-16 w-auto mix-blend-multiply sm:h-[4.75rem]"
+            className="relative z-10 h-14 w-auto mix-blend-multiply sm:h-[4.75rem]"
           />
-
         </Link>
 
         <nav aria-label="Primary" className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
@@ -143,7 +142,7 @@ function NavLink({
 function AdultsBadge() {
   return (
     // <span className="inline-flex h-8 items-center rounded-full border border-[#e0c27a] bg-[#24160f] p-px pr-1 sm:h-9 sm:pr-3.5">
-      <span className="grid h-[26px] font-bold text-center w-[26px] place-items-center rounded-full border border-[#e0c27a] font-serif text-[16px] leading-none tracking-tight text-[#f6edd8] sm:h-[30px] sm:w-[30px] sm:text-[11px]">
+      <span className="grid h-[26px] w-[26px] place-items-center rounded-full border border-[#e0c27a] font-serif text-[10px] leading-none font-bold tracking-tight text-[#f6edd8] sm:h-[30px] sm:w-[30px] sm:text-[11px]">
         18+
       </span>
      
@@ -153,24 +152,52 @@ function AdultsBadge() {
 
 function LogoPlate() {
   return (
+    <>
+      <PlateSvg
+        id="plate-m"
+        viewBox="46 0 214 74"
+        className="absolute top-0 left-0 h-full w-auto sm:hidden"
+      />
+      <PlateSvg
+        id="plate-d"
+        viewBox="0 0 280 74"
+        stretch
+        className="absolute inset-0 hidden h-full w-full sm:block"
+      />
+    </>
+  );
+}
+
+function PlateSvg({
+  id,
+  viewBox,
+  className,
+  stretch = false,
+}: {
+  id: string;
+  viewBox: string;
+  className: string;
+  stretch?: boolean;
+}) {
+  return (
     <svg
-      viewBox="0 0 280 74"
-      preserveAspectRatio="none"
-      className="absolute inset-0 h-full w-full overflow-visible"
+      viewBox={viewBox}
+      preserveAspectRatio={stretch ? "none" : "xMinYMid meet"}
+      className={className}
       aria-hidden
     >
       <defs>
-        <linearGradient id="plate-gold" x1="0" y1="0" x2="1" y2="1">
+        <linearGradient id={`${id}-gold`} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#f6e4c4" />
           <stop offset="42%" stopColor="#f0d3a6" />
           <stop offset="100%" stopColor="#e4c48a" />
         </linearGradient>
-        <linearGradient id="plate-rim" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`${id}-rim`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#fff1c9" />
           <stop offset="50%" stopColor="#e0b85c" />
           <stop offset="100%" stopColor="#8d6428" />
         </linearGradient>
-        <filter id="plate-glow" x="-30%" y="-30%" width="160%" height="160%">
+        <filter id={`${id}-glow`} x="-30%" y="-30%" width="160%" height="160%">
           <feGaussianBlur stdDeviation="1.4" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
@@ -178,13 +205,13 @@ function LogoPlate() {
           </feMerge>
         </filter>
       </defs>
-      <path d={PLATE} fill="url(#plate-gold)" />
+      <path d={PLATE} fill={`url(#${id}-gold)`} />
       <path
         d={EDGE}
         fill="none"
-        stroke="url(#plate-rim)"
+        stroke={`url(#${id}-rim)`}
         strokeWidth="2.2"
-        filter="url(#plate-glow)"
+        filter={`url(#${id}-glow)`}
       />
     </svg>
   );
