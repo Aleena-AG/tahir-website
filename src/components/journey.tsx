@@ -166,14 +166,14 @@ function JourneyFilm() {
           src="/journey-start.jpg"
           alt="A tobacco field at sunrise"
           width={1024}
-          height={682}
+          height={782}
           className={`h-full w-full object-cover ${playing && !docked ? "invisible" : ""}`}
         />
       </div>
       <div
         className={
           docked
-            ? "fixed right-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[60] aspect-video w-44 overflow-hidden rounded-xl bg-black shadow-[0_16px_40px_rgba(0,0,0,0.45)] sm:right-5 sm:w-64"
+            ? "fixed right-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[60] aspect-video w-72 overflow-hidden rounded-xl bg-black shadow-[0_16px_40px_rgba(0,0,0,0.45)] sm:right-5 sm:w-96"
             : "absolute inset-0 overflow-hidden rounded-2xl"
         }
       >
