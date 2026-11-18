@@ -30,11 +30,11 @@ const ITEMS = [
     q: "How can I contact TAHIR?",
     a: (
       <>
-        Write to TAHIR from the{" "}
+        Reach TAHIR by email, phone, or WhatsApp from the{" "}
         <Link href="/contact" className="underline decoration-[#c4a15a] underline-offset-2">
           contact page
         </Link>
-        . Your message is noted there.
+        .
       </>
     ),
   },

@@ -22,11 +22,11 @@ const ITEMS = [
     q: "How can I contact TAHIR for more information about packaging or labelling?",
     a: (
       <>
-        Write from the{" "}
+        Reach TAHIR by email, phone, or WhatsApp from the{" "}
         <Link href="/contact" className="underline decoration-[#c6a15a] underline-offset-2">
           contact page
         </Link>
-        . Your message is noted there.
+        .
       </>
     ),
   },
@@ -44,7 +44,7 @@ export function PackagingFaq() {
             const expanded = open === index;
             const panelId = `packaging-faq-${index}`;
             return (
-              <div key={item.q} className="overflow-hidden rounded-xl border border-[#c6a15a]/70 bg-[#fbf7f0]">
+              <div key={item.q} className="overflow-hidden rounded-xl border border-[#c6a15a]/70 bg-[#9e7252] text-[#f6edd8]">
                 <button
                   type="button"
                   aria-expanded={expanded}
@@ -56,7 +56,7 @@ export function PackagingFaq() {
                   <svg
                     viewBox="0 0 20 20"
                     aria-hidden
-                    className={`h-5 w-5 shrink-0 text-[#3a2a18] transition-transform ${expanded ? "rotate-180" : ""}`}
+                    className={`h-5 w-5 shrink-0 text-[#f6edd8] transition-transform ${expanded ? "rotate-180" : ""}`}
                   >
                     <path
                       d="M5 7.5 10 12.5 15 7.5"
@@ -71,7 +71,7 @@ export function PackagingFaq() {
                 {expanded ? (
                   <p
                     id={panelId}
-                    className="px-5 pb-5 font-serif text-sm leading-relaxed text-[#5c5348] sm:px-6 sm:text-base"
+                    className="px-5 pb-5 font-serif text-sm leading-relaxed text-[#d9c7a4] sm:px-6 sm:text-base"
                   >
                     {item.a}
                   </p>

@@ -13,21 +13,21 @@ export function PageHero({
   return (
     <header
       className={`px-4 pt-14 pb-6 sm:px-6 lg:px-8 lg:pt-20 ${
-        dark ? "bg-[#140e09] text-[#f6edd8]" : "bg-[#f6f1e8] text-[#1c140e]"
+        dark ? "bg-[#140e09] text-[#f6edd8]" : "bg-[#e8d4b8] text-[#4a3022]"
       }`}
     >
       <div className="mx-auto max-w-6xl">
         <p
           className={`flex items-center gap-4 font-serif text-[0.7rem] tracking-[0.32em] uppercase ${
-            dark ? "text-[#e4c98a]" : "text-[#3a2a18]"
+            dark ? "text-[#e4c98a]" : "text-[#4a3022]"
           }`}
         >
-          <span aria-hidden className={`h-px w-10 ${dark ? "bg-[#c6a15a]" : "bg-[#c4a15a]"}`} />
+          <span aria-hidden className={`h-px w-10 ${dark ? "bg-[#c6a15a]" : "bg-[#4a3022]"}`} />
           {eyebrow}
         </p>
         <p
           className={`mt-4 max-w-xl font-serif text-lg leading-relaxed sm:text-xl ${
-            dark ? "text-[#e7d7b4]" : "text-[#3d2e22]"
+            dark ? "text-[#e7d7b4]" : "text-[#4a3022]"
           }`}
         >
           {text}

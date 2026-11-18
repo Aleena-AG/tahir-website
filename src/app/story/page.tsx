@@ -39,7 +39,7 @@ const STEPS = [
 
 export default function StoryPage() {
   return (
-    <main className="flex-1 bg-[#f7f1e6] text-[#2c241c]">
+    <main className="flex-1 bg-[#e8d4b8] text-[#4a3022]">
       <section className="px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
         <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <img
@@ -53,13 +53,13 @@ export default function StoryPage() {
             <h2 className="font-serif text-3xl leading-tight font-medium sm:text-4xl">
               The Journey Behind TAHIR
             </h2>
-            <p className="mt-4 font-serif text-base leading-relaxed text-[#3d342c] sm:text-lg">
+            <p className="mt-4 font-serif text-base leading-relaxed text-[#4a3022] sm:text-lg">
               TAHIR is a tobacco brand with a clear focus on the origin, cultivation, and
               responsible production of tobacco. Our story begins in the tobacco fields, where
               carefully selected seeds, suitable growing conditions, and close attention from
               experienced growers lay the foundation for consistent leaf quality.
             </p>
-            <p className="mt-4 font-serif text-base leading-relaxed text-[#3d342c] sm:text-lg">
+            <p className="mt-4 font-serif text-base leading-relaxed text-[#4a3022] sm:text-lg">
               From cultivation through to production, tobacco leaves go through a series of
               well-defined steps, including harvesting at the right time, controlled processing,
               blending, and manufacturing in facilities that follow established quality and
@@ -75,7 +75,7 @@ export default function StoryPage() {
           <h2 className="font-serif text-3xl leading-tight font-medium sm:text-4xl">
             The Production Process
           </h2>
-          <p className="mt-3 max-w-3xl font-serif text-base leading-relaxed text-[#3d342c] sm:text-lg">
+          <p className="mt-3 max-w-3xl font-serif text-base leading-relaxed text-[#4a3022] sm:text-lg">
             From the field to the finished product, TAHIR follows a structured and monitored
             production process:
           </p>
@@ -90,7 +90,7 @@ export default function StoryPage() {
                   className="mx-auto h-20 w-auto object-contain sm:h-24"
                 />
                 <h3 className="mt-4 font-serif text-lg font-semibold">{step.title}</h3>
-                <p className="mt-2 font-serif text-sm leading-relaxed text-[#5c5348]">{step.text}</p>
+                <p className="mt-2 font-serif text-sm leading-relaxed text-[#4a3022]">{step.text}</p>
               </li>
             ))}
           </ol>
@@ -103,7 +103,7 @@ export default function StoryPage() {
             <h2 className="font-serif text-3xl leading-tight font-medium sm:text-4xl">
               Quality &amp; Responsibility
             </h2>
-            <div className="mt-4 space-y-4 font-serif text-base leading-relaxed text-[#3d342c] sm:text-lg">
+            <div className="mt-4 space-y-4 font-serif text-base leading-relaxed text-[#4a3022] sm:text-lg">
               <p>
                 Quality is a core part of TAHIR&apos;s production philosophy. We operate a modern
                 manufacturing facility with controlled processes, qualified personnel, and regular

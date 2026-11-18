@@ -63,14 +63,14 @@ function NoteIcon({ icon }: { icon: (typeof NOTES)[number]["icon"] }) {
 
 export default function PackagingPage() {
   return (
-    <main className="flex-1 bg-[#f7f1e6] text-[#2c241c]">
+    <main className="flex-1 bg-[#e8d4b8] text-[#4a3022]">
       <section className="px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-center font-serif text-3xl font-medium sm:text-4xl">
             Understanding Our Packaging
           </h2>
           <div className="mt-8 grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-            <div className="flex items-center justify-center rounded-2xl border border-[#c6a15a]/70 bg-[#efe4d0] px-6 py-8">
+            <div className="flex items-center justify-center rounded-2xl border border-[#c6a15a]/70 bg-[#9e7252] px-6 py-8">
               <img
                 src={PRODUCTS[0].src}
                 alt={PRODUCTS[0].alt}
@@ -83,7 +83,7 @@ export default function PackagingPage() {
               <h3 className="font-serif text-2xl font-semibold sm:text-3xl">
                 Labelling and Packaging Identification
               </h3>
-              <div className="mt-4 space-y-4 font-serif text-base leading-relaxed text-[#3d342c]">
+              <div className="mt-4 space-y-4 font-serif text-base leading-relaxed text-[#4a3022]">
                 <p>
                   All TAHIR tobacco products are provided in clearly labelled packs that display
                   the brand name (TAHIR) and the specific variant name (Gold, Amber, Green,
@@ -107,15 +107,15 @@ export default function PackagingPage() {
             {NOTES.map((note) => (
               <li
                 key={note.title}
-                className="rounded-2xl border border-[#c6a15a]/80 bg-[#fbf7f0] px-5 py-5"
+                className="rounded-2xl border border-[#c6a15a]/70 bg-[#9e7252] px-5 py-5 text-[#f6edd8]"
               >
                 <div className="flex items-center gap-3">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#c6a15a] text-[#9a7432]">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#f6edd8] text-[#f6edd8]">
                     <NoteIcon icon={note.icon} />
                   </span>
                   <h3 className="font-serif text-lg font-semibold">{note.title}</h3>
                 </div>
-                <p className="mt-3 font-serif text-sm leading-relaxed text-[#5c5348]">{note.text}</p>
+                <p className="mt-3 font-serif text-sm leading-relaxed text-[#d9c7a4]">{note.text}</p>
               </li>
             ))}
           </ul>
@@ -125,7 +125,7 @@ export default function PackagingPage() {
       <section className="px-4 pb-14 sm:px-6 lg:px-8" aria-label="The TAHIR packs">
         <div className="mx-auto max-w-6xl">
           <h2 className="font-serif text-3xl font-medium sm:text-4xl">Our Six Pack Variants</h2>
-          <p className="mt-3 font-serif text-base text-[#5c5348] sm:text-lg">
+          <p className="mt-3 font-serif text-base text-[#4a3022] sm:text-lg">
             Six TAHIR variants, each with its own distinct packaging for easy identification.
           </p>
           <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
@@ -139,7 +139,7 @@ export default function PackagingPage() {
                   className="mx-auto h-auto w-full object-contain"
                 />
                 <p className="mt-2 font-serif text-sm font-semibold">{RANGE[index].name}</p>
-                <p className="font-serif text-xs text-[#6b6258]">{RANGE[index].edition}</p>
+                <p className="font-serif text-xs text-[#4a3022]">{RANGE[index].edition}</p>
               </li>
             ))}
           </ul>

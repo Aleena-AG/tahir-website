@@ -62,13 +62,13 @@ function NoteIcon({ icon }: { icon: (typeof NOTES)[number]["icon"] }) {
 
 export default function CollectionPage() {
   return (
-    <main className="flex-1 bg-[#f7f1e6] text-[#2c241c]">
+    <main className="flex-1 bg-[#e8d4b8] text-[#4a3022]">
       <section className="px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
         <div className="mx-auto max-w-6xl">
           <div className="text-center">
             <h2 className="font-serif text-3xl font-medium sm:text-4xl">Product Range</h2>
-            <span aria-hidden className="mx-auto mt-3 block h-0.5 w-16 bg-[#c6a15a]" />
-            <p className="mt-3 font-serif text-base text-[#5c5348] sm:text-lg">
+            <span aria-hidden className="mx-auto mt-3 block h-0.5 w-16 bg-[#4a3022]" />
+            <p className="mt-3 font-serif text-base text-[#4a3022] sm:text-lg">
               Six TAHIR variants, presented with their packaging identification.
             </p>
           </div>
@@ -76,7 +76,7 @@ export default function CollectionPage() {
           <ul className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {PRODUCTS.map((product, index) => (
               <li key={product.src}>
-                <article className="flex h-full flex-col items-center rounded-2xl border border-[#c6a15a]/80 bg-[#fbf7f0] px-5 py-6">
+                <article className="flex h-full flex-col items-center rounded-2xl border border-[#c6a15a]/70 bg-[#9e7252] px-5 py-6">
                   <img
                     src={product.src}
                     alt={product.alt}
@@ -84,8 +84,8 @@ export default function CollectionPage() {
                     height={product.height}
                     className="h-auto w-full max-w-[260px] object-contain"
                   />
-                  <h3 className="mt-4 text-center font-serif text-lg font-semibold">{RANGE[index].name}</h3>
-                  <p className="mt-1 text-center font-serif text-sm text-[#6b6258]">{RANGE[index].edition}</p>
+                  <h3 className="mt-4 text-center font-serif text-lg font-semibold text-[#f6edd8]">{RANGE[index].name}</h3>
+                  <p className="mt-1 text-center font-serif text-sm text-[#d9c7a4]">{RANGE[index].edition}</p>
                 </article>
               </li>
             ))}
@@ -97,7 +97,7 @@ export default function CollectionPage() {
         <div className="mx-auto max-w-6xl">
           <h2 className="font-serif text-3xl font-medium sm:text-4xl">Packaging &amp; Health Information</h2>
           <div className="mt-8 grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-            <div className="flex items-center justify-center rounded-2xl bg-[#efe4d0] px-6 py-8">
+            <div className="flex items-center justify-center rounded-2xl bg-[#9e7252] px-6 py-8">
               <img
                 src={PRODUCTS[0].src}
                 alt={PRODUCTS[0].alt}
@@ -109,12 +109,12 @@ export default function CollectionPage() {
             <ul className="space-y-6">
               {NOTES.map((note) => (
                 <li key={note.title} className="flex gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#c6a15a] text-[#9a7432]">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#4a3022] text-[#4a3022]">
                     <NoteIcon icon={note.icon} />
                   </span>
                   <div>
                     <h3 className="font-serif text-lg font-semibold">{note.title}</h3>
-                    <p className="mt-1 font-serif text-sm leading-relaxed text-[#5c5348] sm:text-base">
+                    <p className="mt-1 font-serif text-sm leading-relaxed text-[#4a3022] sm:text-base">
                       {note.text}
                     </p>
                   </div>

@@ -12,7 +12,7 @@ export default function PrivacyPage() {
       text={TEXT}
       paragraphs={[
         "Age confirmation is stored in your browser so you are not asked again on this device. You can clear it by clearing this site’s data in your browser.",
-        "The contact form keeps your message in the browser only. It is not sent to a server.",
+        "Choosing Email opens Gmail with your message. Choosing WhatsApp opens WhatsApp. Choosing Phone starts a call. This website does not store the message.",
       ]}
     />
   );
